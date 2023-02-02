@@ -31,7 +31,7 @@ fn (app &App) on_open_url(_ &ui.Button) {
 
 	item := app.items[index]
 
-	go ui.open_url(item.url)
+	spawn ui.open_url(item.url)
 }
 
 fn (app &App) on_change(listbox &ui.ListBox) {

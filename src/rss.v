@@ -2,7 +2,6 @@ module main
 
 import vxml
 
-
 fn get_tag_text_from_item(item &vxml.Node, tag_name string) ?string {
 	link_el := item.get_element_by_tag_name(tag_name) or { return none }
 
