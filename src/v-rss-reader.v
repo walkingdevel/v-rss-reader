@@ -8,7 +8,7 @@ const (
 	window_width    = 1000
 	window_height   = 600
 	window_title    = 'RSS Reader'
-	info_widget_id  = 'label_info'
+	info_widget_id  = 'textbox_info'
 	item_listbox_id = 'listbox_titles'
 )
 

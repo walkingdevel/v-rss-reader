@@ -1,7 +1,6 @@
 module main
 
 import vxml
-import time
 import net.http
 
 fn fetch(url string) !string {
@@ -12,21 +11,6 @@ fn fetch(url string) !string {
 	}
 
 	return response.body
-}
-
-struct RSSItem {
-	url         string
-	title       string
-	description string
-	author      string
-	pub_date    time.Time
-}
-
-fn (r &RSSItem) preview() string {
-	title := if r.title != '' { r.title } else { '...' }
-	description := if r.description != '' { r.description } else { '...' }
-
-	return '${title}\n\n${description}'
 }
 
 fn fetch_and_parse(url string) !vxml.Node {
