@@ -8,7 +8,7 @@ struct App {
 mut:
 	window &ui.Window
 	urls   []string
-	items  []FeedItem
+	items  []&FeedItem
 }
 
 fn (mut app App) on_init(_ &ui.Window) {
@@ -71,19 +71,7 @@ fn (mut app App) fetch_sources() {
 	for _ in 0 .. app.urls.len {
 		select {
 			result := <-result_chan {
-				item_els := result.get_elements_by_tag_name('item')
-
-				for item_el in item_els {
-					title := get_tag_text_from_item(item_el, 'title') or { continue }
-					url := get_tag_text_from_item(item_el, 'link') or { continue }
-					description := get_tag_text_from_item(item_el, 'description') or { '' }
-
-					app.items << FeedItem{
-						title: title
-						url: url
-						description: convert_html_to_text(description)
-					}
-				}
+				app.items = get_feed_items_from_node(result)
 			}
 			error := <-error_chan {
 				ui.message_box(error.str())
